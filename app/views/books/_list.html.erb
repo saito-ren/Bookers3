@@ -1,0 +1,46 @@
+<h2>User info</h2>
+<!-- attachment_image_tag モデル名, :_idを省略したカラム名, :fill, 横幅の数値(例: 100), 縦幅の数値, format: '拡張子名(例: jpg)', fallback(代替画像): ""  -->
+<!-- fillでは表示されない場合　size: "" -->
+<%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+
+<table>
+   <tr>
+   	<th>name</th>
+   	<th><%= user.name %></th>
+   </tr>
+
+   <tr>
+   	<th>introduction</th>
+   	<th><%= user.introduction %></th>
+   </tr>
+</table>
+
+  <%= link_to edit_user_path(current_user.id) do %>
+<button type="button" class= "col-xs-10 btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></button>
+  <% end %>
+
+  <h2>New book</h2>
+
+  <%= form_for (book) do |f| %>
+  <%# ここからエラーメッセージ %>
+      <% if book.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+            <ul>
+              <% book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+        </div>
+      <% end %>
+    <%# ここまでエラーメッセージ %>
+
+    <%= f.label :title, "Title" %><br>
+    <%= f.text_field :title %>
+
+    <%= f.label :body, "Opinion" %><br>
+    <%= f.text_area :body %>
+
+    <%= f.submit 'Create Book' %>
+
+  <% end %>

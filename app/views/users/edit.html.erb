@@ -1,0 +1,27 @@
+<h2>User info</h2>
+
+<%= form_for (@user) do |f| %>
+<!-- エラーメッセージ -->
+	<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <%= f.label :name, "Name" %><br>
+    <%= f.text_field :name %>
+
+    <%= f.label :profile_image, "Image" %><br>
+    <%= f.attachment_field :profile_image %>
+
+    <%= f.label :introduction, "Introduction" %><br>
+    <%= f.text_area :introduction %>
+
+    <%= f.submit "Update User" %>
+<% end %>
